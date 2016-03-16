@@ -13,7 +13,7 @@ var model = {
 	generateData: function(jsonData) {
 		this.rates = []
 
-		for (key in jsonData.rates)
+		for (key in [EUR,GBP,JPY,CHF,CNY,RUB])
 		{
 			if (jsonData.rates.hasOwnProperty(key))
 			{
@@ -69,7 +69,7 @@ var view = {
 		  /* L'affichage est inférieur à 600px de large */
 		}
 
-        this.margin = {top: 20, right: 20, bottom: 20, left: 20},
+        this.margin = {top: 20, right: 20, bottom: 20, left:30},
 
         this.width = boxWidth - this.margin.right - this.margin.left;
         this.height = boxWidth*2/3 - this.margin.top - this.margin.bottom;
@@ -102,10 +102,12 @@ var view = {
 	        this.xAxis  = d3.svg.axis()
 	        				.scale(this.xScale)
 	        				.orient("bottom")
+	        				.ticks(d3.time.days,5)
 	   						.tickFormat(d3.time.format("%d"));
 
 			this.yAxis  = d3.svg.axis()
 	        				.scale(this.yScale)
+	        				.tickFormat(d3.format('.3r'))
 	        				.orient("left");
 
 			var line = d3.svg.line()
@@ -149,6 +151,32 @@ var view = {
 	                'text-anchor': "end",
 	                'fill':'steelblue'
 	            });
+
+ // bisectDate = d3.bisector(function(d) { return d.date; }).left; // **
+
+            // append the rectangle to capture mouse               // **********
+		    // svg.append("rect")                                     // **********
+		    //     .attr("width", width)                              // **********
+		    //     .attr("height", height)                            // **********
+		    //     .style("fill", "none")                             // **********
+		    //     .style("pointer-events", "all")                    // **********
+		    //     .on("mouseover", function() { focus.style("display", null); })
+		    //     .on("mouseout", function() { focus.style("display", "none"); })
+		    //     .on("mousemove", mousemove);                       // **********
+
+		    // function mousemove() {                                 // **********
+		    //     var x0 = x.invert(d3.mouse(this)[0]),              // **********
+		    //         i = bisectDate(data, x0, 1),                   // **********
+		    //         d0 = data[i - 1],                              // **********
+		    //         d1 = data[i],                                  // **********
+		    //         d = x0 - d0.date > d1.date - x0 ? d1 : d0;     // **********
+
+		    //     focus.select("circle.y")                           // **********
+		    //         .attr("transform",                             // **********
+		    //               "translate(" + x(d.date) + "," +         // **********
+		    //                              y(d.close) + ")");        // **********
+		    // }                                                      // **********
+
 	    }
 	}
 }

@@ -1,0 +1,53 @@
+body html {
+	width: 100%;
+	padding:0px;
+	margin:0px;
+}
+
+.box {
+	width: 33%;
+	display: inline-flex;
+}
+
+.tick text{
+  fill: #555;
+  font-size: 10px;
+}
+
+.tick line{
+  stroke: #A53;
+  stroke-width: 1px;
+}
+
+svg g.axis path{
+  fill: none;
+  stroke: grey;
+  stroke-width: 2px;
+}
+
+.chartLine {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+@media only screen and (max-width : 480px) {
+
+	.box {
+		display: block;
+		width: 100%;
+	}
+
+	.tick text{
+	  fill: none;
+	}
+
+	.tick line{
+	  fill: none;
+	  stroke-width: 1px;
+	}
+
+	svg g.axis path{
+	  fill: none;
+	}
+}
